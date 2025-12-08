@@ -1,72 +1,55 @@
-
-<!DOCTYPE html>
-<html lang="ar">
+<!doctype html>
+<html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دردشة الجزائر</title>
-
-    <link rel="stylesheet" href="style.css">
-
-    <!-- Firebase -->
-    <script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>دردشة الجزائر — الملك</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-
+  <div class="app">
     <header>
-        <h1>📱 دردشة الجزائر</h1>
+      <div class="brand">
+        <span class="phone-emoji">📱</span>
+        <h1>دردشة الجزائر</h1>
+      </div>
+      <div class="me">
+        <input id="usernameInput" placeholder="اختر اسمًا..." />
+        <button id="saveNameBtn">حفظ</button>
+      </div>
     </header>
 
-    <div id="chat-box"></div>
+    <main>
+      <aside class="sidebar">
+        <div class="section-title">المستخدمون</div>
+        <ul id="usersList">
+          <!-- سيملأ بواسطة JS -->
+        </ul>
+      </aside>
 
-    <div id="input-area">
-        <input id="username" placeholder="اسمك">
-        <input id="message" placeholder="اكتب رسالتك...">
-        <button onclick="sendMessage()">إرسال</button>
-    </div>
+      <section class="chat">
+        <div class="chat-top">
+          <div id="currentTarget">المحادثة: <span id="targetName">عام (Public)</span></div>
+          <div class="actions">
+            <button id="btnPublic" class="active">عام</button>
+            <button id="btnPrivate">خاص</button>
+          </div>
+        </div>
 
-    <script>
-        const firebaseConfig = {
-            apiKey: "AIzaSyCmZOwHDaMkpJtl9Is4p7YuhjtFZZ7pHv4",
-            authDomain: "chat-algerie-a2c71.firebaseapp.com",
-            projectId: "chat-algerie-a2c71",
-            storageBucket: "chat-algerie-a2c71.firebasestorage.app",
-            messagingSenderId: "122054820778",
-            appId: "1:122054820778:web:9997e980072fb4014be1d3",
-            measurementId: "G-MYRPJ3CMNB"
-        };
+        <div id="messages" class="messages"></div>
 
-        const app = firebase.initializeApp(firebaseConfig);
-        const db = firebase.database();
+        <div class="composer">
+          <input id="msgInput" placeholder="اكتب رسالتك..." />
+          <button id="sendBtn">إرسال</button>
+        </div>
+      </section>
+    </main>
 
-        function sendMessage() {
-            let name = document.getElementById("username").value;
-            let msg = document.getElementById("message").value;
+    <footer>
+      <div>مرحباً — أنت الملك 👑</div>
+    </footer>
+  </div>
 
-            if (name.trim() === "" || msg.trim() === "") return;
-
-            db.ref("messages").push({
-                username: name,
-                message: msg
-            });
-
-            document.getElementById("message").value = "";
-        }
-
-        db.ref("messages").on("child_added", snapshot => {
-            let data = snapshot.val();
-            let chatBox = document.getElementById("chat-box");
-
-            let msgDiv = document.createElement("div");
-            msgDiv.className = "msg";
-            msgDiv.innerHTML = `<strong>${data.username}:</strong> ${data.message}`;
-
-            chatBox.appendChild(msgDiv);
-            chatBox.scrollTop = chatBox.scrollHeight;
-        });
-    </script>
-
+  <script type="module" src="script.js"></script>
 </body>
 </html>
