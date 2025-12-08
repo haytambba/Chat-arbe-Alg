@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>غرفة الدردشة</title>
+
+    <style>
+        body {
+            background: #111;
+            color: #fff;
+            font-family: Tahoma;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        #chat-box {
+            width: 90%;
+            height: 350px;
+            margin: 20px auto;
+            background: #222;
+            border: 1px solid #444;
+            border-radius: 10px;
+            padding: 10px;
+            overflow-y: scroll;
+        }
+
+        .msg {
+            background: #333;
+            padding: 8px;
+            margin: 5px;
+            border-radius: 5px;
+            text-align: right;
+            width: fit-content;
+            max-width: 70%;
+        }
+
+        #msgInput {
+            width: 70%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            margin-top: 10px;
+        }
+
+        button {
+            padding: 10px 15px;
+            background: #0a84ff;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>مرحبا بك في موقع الدردشة</h2>
+
+    <div id="chat-box"></div>
+
+    <input id="msgInput" type="text" placeholder="اكتب رسالتك هنا...">
+    <button onclick="sendMsg()">إرسال</button>
+
+    <script>
+        function sendMsg() {
+            let box = document.getElementById("chat-box");
+            let input = document.getElementById("msgInput");
+
+            if (input.value.trim() === "") return;
+
+            let msg = document.createElement("div");
+            msg.className = "msg";
+            msg.textContent = input.value;
+
+            box.appendChild(msg);
+            input.value = "";
+            box.scrollTop = box.scrollHeight;
+        }
+    </script>
+
+</body>
+</html>
