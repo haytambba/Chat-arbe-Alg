@@ -1,55 +1,62 @@
 <!doctype html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>دردشة الجزائر — الملك</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Chat DZ - Realtime</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Firebase (compat - سهل الاستخدام بدون bundler) -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
 </head>
-<body>
-  <div class="app">
-    <header>
-      <div class="brand">
-        <span class="phone-emoji">📱</span>
-        <h1>دردشة الجزائر</h1>
+<body dir="rtl" class="rtl">
+  <header>
+    <h1>موقع دردشة جزائري</h1>
+    <div id="me">جارٍ الاتصال...</div>
+  </header>
+
+  <main>
+    <aside class="left">
+      <h3>الغرف</h3>
+      <ul id="rooms"></ul>
+      <button id="newRoomBtn">إنشاء غرفة</button>
+
+      <h3>المستخدمون</h3>
+      <div id="users"></div>
+    </aside>
+
+    <section class="center">
+      <div id="roomTitle">اختر غرفة</div>
+      <div id="chat-box"></div>
+
+      <div class="composer">
+        <select id="toUser"><option value="">عام</option></select>
+        <input id="msg" placeholder="اكتب رسالتك..." autocomplete="off" />
+        <button id="sendBtn">إرسال</button>
       </div>
-      <div class="me">
-        <input id="usernameInput" placeholder="اختر اسمًا..." />
-        <button id="saveNameBtn">حفظ</button>
+    </section>
+
+    <aside class="right">
+      <h3>الإعدادات</h3>
+      <div>
+        <label>اسمك: <input id="name" /></label>
       </div>
-    </header>
+      <div>
+        <label>رتبة:
+          <select id="rank">
+            <option value="member">عضو</option>
+            <option value="mod">مشرف</option>
+            <option value="owner">مالك</option>
+          </select>
+        </label>
+      </div>
+      <button id="saveProfile">حفظ الملف</button>
+      <hr/>
+      <button id="logout">خروج</button>
+    </aside>
+  </main>
 
-    <main>
-      <aside class="sidebar">
-        <div class="section-title">المستخدمون</div>
-        <ul id="usersList">
-          <!-- سيملأ بواسطة JS -->
-        </ul>
-      </aside>
-
-      <section class="chat">
-        <div class="chat-top">
-          <div id="currentTarget">المحادثة: <span id="targetName">عام (Public)</span></div>
-          <div class="actions">
-            <button id="btnPublic" class="active">عام</button>
-            <button id="btnPrivate">خاص</button>
-          </div>
-        </div>
-
-        <div id="messages" class="messages"></div>
-
-        <div class="composer">
-          <input id="msgInput" placeholder="اكتب رسالتك..." />
-          <button id="sendBtn">إرسال</button>
-        </div>
-      </section>
-    </main>
-
-    <footer>
-      <div>مرحباً — أنت الملك 👑</div>
-    </footer>
-  </div>
-
-  <script type="module" src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
