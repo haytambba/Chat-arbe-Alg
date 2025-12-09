@@ -59,4 +59,24 @@
 
   <script src="script.js"></script>
 </body>
-</html>
+</html>// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyCmZOwHDaMkpJtl9Is4p7YuhjtFZZ7pHv4",
+  authDomain: "chat-algerie-a2c71.firebaseapp.com",
+  projectId: "chat-algerie-a2c71",
+  storageBucket: "chat-algerie-a2c71.firebasestorage.app",
+  messagingSenderId: "122054820778",
+  appId: "1:122054820778:web:9997e980072fb4014be1d3",
+  measurementId: "G-MYRPJ3CMNB"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
