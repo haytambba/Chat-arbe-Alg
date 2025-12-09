@@ -3,17 +3,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Chat DZ - Realtime</title>
-  <link rel="stylesheet" href="style.css" />
-  <!-- Firebase (compat - سهل الاستخدام بدون bundler) -->
-  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+  <title>موقع دردشة</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-<body dir="rtl" class="rtl">
+<body dir="rtl">
   <header>
-    <h1>موقع دردشة جزائري</h1>
-    <div id="me">جارٍ الاتصال...</div>
+    <h1>دردشة جزائرية</h1>
+    <div id="me">غير متصل</div>
   </header>
 
   <main>
@@ -22,59 +18,45 @@
       <ul id="rooms"></ul>
       <button id="newRoomBtn">إنشاء غرفة</button>
 
+      <hr/>
       <h3>المستخدمون</h3>
       <div id="users"></div>
+
+      <hr/>
+      <h3>الملف الشخصي</h3>
+      <input id="name" placeholder="الاسم" />
+      <select id="rank">
+        <option value="member">عضو</option>
+        <option value="mod">مشرف</option>
+        <option value="king">ملك</option>
+      </select>
+      <button id="saveProfile">حفظ</button>
+      <button id="logout">خروج</button>
     </aside>
 
-    <section class="center">
-      <div id="roomTitle">اختر غرفة</div>
-      <div id="chat-box"></div>
+    <section class="chat">
+      <div class="chat-header">
+        <div id="roomTitle">لم تدخل غرفة</div>
+        <div>
+          <label>خاص مع:</label>
+          <select id="toUser"><option value="">عام</option></select>
+        </div>
+      </div>
+
+      <div id="chat-box" class="chat-box"></div>
 
       <div class="composer">
-        <select id="toUser"><option value="">عام</option></select>
-        <input id="msg" placeholder="اكتب رسالتك..." autocomplete="off" />
+        <input id="msg" placeholder="اكتب رسالة..." />
         <button id="sendBtn">إرسال</button>
       </div>
     </section>
-
-    <aside class="right">
-      <h3>الإعدادات</h3>
-      <div>
-        <label>اسمك: <input id="name" /></label>
-      </div>
-      <div>
-        <label>رتبة:
-          <select id="rank">
-            <option value="member">عضو</option>
-            <option value="mod">مشرف</option>
-            <option value="owner">مالك</option>
-          </select>
-        </label>
-      </div>
-      <button id="saveProfile">حفظ الملف</button>
-      <hr/>
-      <button id="logout">خروج</button>
-    </aside>
   </main>
 
-  <script src="script.js"></script><script src="script.js"></script>
+  <!-- Firebase (v8 compat CDN) -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyCmZOwHDaMkpJtl9Is4p7YUhjtpFZZ7pHv4",
-    authDomain: "chat-algerie-a2c71.firebaseapp.com",
-    projectId: "chat-algerie-a2c71",
-    storageBucket: "chat-algerie-a2c71.firebasestorage.app",
-    messagingSenderId: "122054820778",
-    appId: "1:122054820778:web:9997e980072fb4014be1d3",
-    measurementId: "G-MYRPJ3CMNB"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-</script>
+  <script src="script.js"></script>
 </body>
 </html>
