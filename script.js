@@ -1,40 +1,23 @@
-// ----- ضع هنا إعدادات Firebase الخاصة بك -----
-const firebaseConfig = {
-  apiKey: "REPLACE_APIKEY",
-  authDomain: "REPLACE_PROJECT.firebaseapp.com",
-  databaseURL: "https://REPLACE_PROJECT-default-rtdb.firebaseio.com",
-  projectId: "REPLACE_PROJECT",
-  storageBucket: "REPLACE_PROJECT.appspot.com",
-  messagingSenderId: "XXXX",
-  appId: "XXXX"
-};
-// ---------------------------------------------
-
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
-const db = firebase.database();
-
-let currentUser = null;
-let currentRoom = null;
-
-// عناصر DOM
-const roomsEl = document.getElementById('rooms');
-const usersEl = document.getElementById('users');
-const chatBox = document.getElementById('chat-box');
-const roomTitle = document.getElementById('roomTitle');
-const msgInput = document.getElementById('msg');
-const sendBtn = document.getElementById('sendBtn');
-const nameInput = document.getElementById('name');
-const rankSelect = document.getElementById('rank');
-const saveProfile = document.getElementById('saveProfile');
-const newRoomBtn = document.getElementById('newRoomBtn');
-const toUser = document.getElementById('toUser');
-const meDiv = document.getElementById('me');
-const logoutBtn = document.getElementById('logout');
-
-// anonymous sign-in
-auth.signInAnonymously().catch(console.error);
-auth.onAuthStateChanged(user => {
+:root{--bg:#0f1720;--card:#111827;--accent:#38bdf8;--text:#e6eef6}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--text)}
+header{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:#071021}
+main{display:flex;height:calc(100vh - 56px)}
+.left{width:300px;background:#08111a;padding:12px;overflow:auto;border-left:4px solid #06212b}
+.left h3{margin:8px 0}
+.left ul{list-style:none;padding:0;margin:0}
+.left ul li{padding:8px;border-radius:6px;margin:6px 0;background:#071622;cursor:pointer}
+.left ul li.active{background:var(--accent);color:#003244}
+.left button,input,select{width:100%;padding:8px;margin:6px 0;border-radius:6px;border:1px solid #223}
+.chat{flex:1;display:flex;flex-direction:column}
+.chat-header{display:flex;justify-content:space-between;align-items:center;padding:12px;background:#04121a;border-bottom:1px solid #082}
+.chat-box{flex:1;padding:12px;overflow:auto}
+.msg{background:#071827;padding:8px;margin:8px 0;border-radius:8px;max-width:75%}
+.msg .meta{font-size:12px;color:#9fb6c8;margin-bottom:6px}
+.composer{display:flex;padding:12px;border-top:1px solid #082;background:#04121a}
+.composer input{flex:1;padding:10px;border-radius:6px;border:1px solid #123;margin-right:8px}
+.composer button{padding:10px 14px;border-radius:6px;border:none;background:var(--accent);color:#022}
+@media(max-width:700px){.left{width:220px}}auth.onAuthStateChanged(user => {
   if(!user) return;
   currentUser = { uid: user.uid };
   meDiv.textContent = `متصل: ${user.uid}`;
